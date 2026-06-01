@@ -440,7 +440,7 @@ st.write(
 
 with st.sidebar:
     st.header("API settings")
-    api_key = st.text_input("DeepSeek API key", type="password")
+    password = st.text_input("Password", type="password")
     base_url = st.text_input(
         "OpenAI-compatible base URL",
         value=DEFAULT_BASE_URL,
@@ -489,8 +489,10 @@ if reset_clicked:
         st.warning("Enter a problem before resetting the search tree.")
 
 if run_clicked:
-    if not api_key:
-        st.error("Please provide a DeepSeek API key.")
+    if not password:
+        st.error("Please provide a password.")
+    elif password != st.secrets["APP_PASSWORD"]:
+        st.error("Incorrect password.", icon="🚫")
     elif not problem.strip():
         st.error("Please enter a problem statement.")
     else:
@@ -503,7 +505,7 @@ if run_clicked:
             st.info("A terminal answer has already been found. Reset to start a new search.")
         else:
             run_search(
-                api_key=api_key,
+                api_key=st.secrets["DEEPSEEK_API_KEY"],
                 base_url=base_url,
                 problem=problem.strip(),
                 thought_budget=int(thought_budget),
