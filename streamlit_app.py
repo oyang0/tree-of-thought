@@ -33,7 +33,7 @@ class ThoughtNode:
 # Utility functions
 # -----------------------------
 DEFAULT_BASE_URL = "https://api.deepseek.com"
-MODEL_NAME = "DeepSeek-V4-Pro"
+MODEL_NAME = "deepseek-v4-pro"
 EPSILON = 1e-12
 
 
